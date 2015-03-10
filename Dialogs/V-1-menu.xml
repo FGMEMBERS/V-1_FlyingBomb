@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <default>
+    <menu n="10">
+      <label>V-1</label>
+      <enabled type="bool">true</enabled>
+      <item>
+        <label>Rearm bomb</label>
+        <binding>
+          <command>nasal</command>
+          <script>V1.rearm();</script>
+        </binding>
+      </item>
+    </menu>
+  
+</default>
+
+</PropertyList>
+

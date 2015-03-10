@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<PropertyList>
+	<help>
+		<title>V-1 Flying Bomb ("Buzzbomb"/"Doodlebug")</title>
+		<key>
+			<name>Shift-L</name>
+			<desc>Launch (on the ground only)</desc>
+		</key>
+		<key>
+			<name>Shift-D (2x)</name>
+			<desc>Manual detonate (eg. when shot down)</desc>
+		</key>
+		<key>
+			<name>CTRL-B</name>
+			<desc>Parachute</desc>
+		</key>
+		
+		
+		<line>Takeoff: </line>
+		<line>Set full throttle and use the launch hotkey Shift-L. </line>
+		<line>In a second you should be climbing up. Be careful not to climb too steep, </line>
+		<line>the stall speed is rather high and the pulsejet is not that powerful. </line>
+		<line>The climb rate provided by the autopilot should be fine. </line>
+		<line>The cruise altitude should be 2000-3000 ft. </line>
+		<line>Guidance on target: </line>
+		<line>Use the Route manager to guide the V-1 to desired location. </line>
+		<line>Set one waypoint with the cruise altitude and another one with negative </line>
+		<line>altitude like -5000. This way, the V-1 will start descending after it </line>
+		<line>reaches the first waypoint. </line>
+		<line>The bomb detonates on impact or manually using the Detonate key binding. </line>
+		<line>The Detonate key must be pressed twice quickly within 2 seconds </line>
+		<line>to prevent accidental trigger. </line>
+		<line>You can use the "V-1" -> "Rearm bomb" dialog to prepare </line>
+		<line>for triggering another explosion. </line>
+		<line></line>
+		<line>The version V-1_Parachute has experimental parachute, it's not realistic</line>
+		<line>to have one</line>
+		
+	</help>
+</PropertyList>

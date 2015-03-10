@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <fx>
+     
+   <!-- Make sure I tune the sound range properly! the buzzbomb could be heard from over 16km -->
+
+    
+    <engine-front>
+      <name>Engine Front</name>
+      <mode>looped</mode>
+      <path>V-1_FrontBuzz.wav</path>
+      <condition>
+        <not>
+          <property>sim/multiplay/generic/int[2]</property>
+        </not>
+      </condition>
+      <position>
+        <x>3.479</x>
+        <y>0</y>
+        <z>0.725</z>
+      </position>
+      <orientation>
+        <x>1</x>
+        <y>0</y>
+        <z>0</z>
+        <inner-angle>90.0</inner-angle>
+        <outer-angle>180.0</outer-angle>
+        <outer-gain>0.35</outer-gain>
+      </orientation>
+      <volume>
+        <property>engines/engine/n1</property>
+        <factor>0.1</factor>
+        <offset>-6.5</offset>
+        <min>0.00</min>
+        <max>10</max>
+      </volume>
+      <!--><volume>
+        <property>velocities/groundspeed-kt</property>
+        <factor>0.0175</factor>
+        <offset>0.25</offset>
+        <min>0.8</min>
+        <max>1.1</max>
+      </volume><-->
+      <reference-dist>600</reference-dist>
+      <max-dist>18000</max-dist>
+    </engine-front>
+    
+    <engine-rear>
+      <name>Engine Rear</name>
+      <mode>looped</mode>
+      <path>V-1_RearBuzz.wav</path>
+      <condition>
+        <not>
+          <property>sim/multiplay/generic/int[2]</property>
+        </not>
+      </condition>
+      <position>
+        <x>3.479</x>
+        <y>0</y>
+        <z>0.725</z>
+      </position>
+      <orientation>
+        <x>-1</x>
+        <y>0</y>
+        <z>0</z>
+        <inner-angle>90.0</inner-angle>
+        <outer-angle>180.0</outer-angle>
+        <outer-gain>0.35</outer-gain>
+      </orientation>
+      <volume>
+        <property>engines/engine/n1</property>
+        <factor>0.1</factor>
+        <offset>-6.5</offset>
+        <min>0.00</min>
+        <max>10</max>
+      </volume>
+      <!--><volume>
+        <property>velocities/groundspeed-kt</property>
+        <factor>0.0175</factor>
+        <offset>0.25</offset>
+        <min>0.8</min>
+        <max>1.1</max>
+      </volume><-->
+      <reference-dist>600</reference-dist>
+      <max-dist>18000</max-dist>
+    </engine-rear>
+    
+    <explosion>
+      <name>Explosion</name>
+      <mode>once</mode>
+      <path>Explosion.wav</path>
+      <condition>
+        <property>sim/multiplay/generic/int[2]</property>
+      </condition>
+      <volume>
+        <value>1</value>
+      </volume>
+      <reference-dist>2500</reference-dist>
+      <max-dist>22000</max-dist>
+    </explosion>
+    
+    <fire>
+      <name>Fire</name>
+      <mode>looped</mode>
+      <path>Fire.wav</path>
+      <condition>
+        <and>
+          <greater-than>
+            <property>sim/multiplay/generic/int[2]</property>
+            <value>0.5</value>
+          </greater-than>
+          <less-than>
+            <property>sim/multiplay/generic/int[2]</property>
+            <value>1.5</value>
+          </less-than>
+        </and>
+      </condition>
+      <volume>
+        <value>1</value>
+      </volume>
+      <reference-dist>100</reference-dist>
+      <max-dist>4000</max-dist>
+    </fire>
+    
+    
+    <wind>
+      <name>wind</name>
+      <mode>looped</mode>
+      <path>Sounds/wind.wav</path>
+      <property>velocities/airspeed-kt</property>
+      <volume>
+        <property>position/altitude-ft</property>
+        <factor>-0.000015</factor>
+        <offset>1.0</offset>
+        <min>0.1</min>
+        <max>1.0</max>
+      </volume>
+      <volume>
+        <property>velocities/airspeed-kt</property>
+        <factor>0.0015</factor>
+        <min>0.02</min>
+        <max>0.08</max>
+      </volume>
+      <pitch>
+        <property>velocities/airspeed-kt</property>
+        <factor>0.01</factor>
+        <offset>1.25</offset>
+      </pitch>
+    </wind>
+    
+  </fx>
+
+</PropertyList>

@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <path>V-1.ac</path>
+  
+  <!-- MP sound support -->
+  <sound>
+    <path>Aircraft/V-1_FlyingBomb/Sounds/V-1-sound.xml</path>
+  </sound>
+  
+  <nasal>
+    <load><![CDATA[
+var root = cmdarg();
+var rootindex = root.getIndex();
+    
+srand(); #set seed for random generator
+
+#flame Rembrandt light brightness alternation
+var flamePath = "/ai/models/multiplayer["~ rootindex ~"]/sim/model/V-1/";
+props.globals.initNode(flamePath ~ "flameBright", 0.0, "DOUBLE");
+var flameSeq = [0,0,0,0];
+var curSeq = 0;
+var flameBright = func {
+	flameSeq[curSeq] = 0.5 + rand()*0.5;
+	
+	setprop(flamePath ~ "flameBright", 
+		(flameSeq[0]+flameSeq[1]+flameSeq[2]+flameSeq[3]) / 4);
+	
+	if( curSeq < 3)
+		curSeq += 1;
+	else
+		curSeq = 0;
+		
+	settimer(flameBright, 0.02);
+}
+
+settimer(flameBright, 0.02);
+
+    ]]></load>
+  </nasal>
+  
+  <!-- tiptrails-->
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Tiptrail/Tiptrail.xml</path>
+    <offsets>
+      <x-m>0.807</x-m>
+      <y-m>2.676</y-m>
+      <z-m>0.0</z-m>
+     <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Tiptrail/Tiptrail.xml</path>
+    <offsets>
+      <x-m>0.807</x-m>
+      <y-m>-2.676</y-m>
+      <z-m>0.0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+ 
+  <!-- smoke -->
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/Effects/Smoke/Smoke.xml</path>
+    <offsets>
+      <x-m>5.383</x-m>
+      <y-m>0</y-m>
+      <z-m>0.700</z-m>
+    </offsets>
+  </model>
+  <!-- contrail -->
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/Effects/Contrail/Contrail.xml</path>
+    <offsets>
+      <x-m>9.0</x-m>
+      <y-m>0</y-m>
+      <z-m>0.700</z-m>
+    </offsets>
+  </model>
+  
+  <!-- Pulsejet flame -->
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/Effects/PulsejetFlame/Flame.xml</path>
+    <offsets>
+      <x-m>6.2</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.700</z-m>
+    </offsets>
+  </model>
+  
+  <!-- Pulsejet distant flame animation -->
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/Effects/DistantFlame/DistantFlame.xml</path>
+    <offsets>
+      <x-m>5.4</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.740</z-m>
+    </offsets>
+  </model>
+  
+  <!-- Pulsejet front fire -->
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/Effects/FrontFire/FrontFire.xml</path>
+    <offsets>
+      <x-m>1.944</x-m>
+      <y-m>0.014</y-m>
+      <z-m>0.722</z-m>
+    </offsets>
+  </model>
+
+  <!-- Pulsejet fire Rembrandt light -->
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/Lights/FireLight.xml</path>
+    <offsets>
+      <x-m>5.6</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.740</z-m>
+    </offsets>
+  </model>
+  
+  <!-- Impact explosion -->
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Explosion/Explode.xml</path>
+  <condition>
+    <property>sim/multiplay/generic/int[1]</property><!--><property>/nasal/explode</property><-->
+  </condition>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>0</z-m>
+    <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+  
+  <!-- Impact fire -->
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Explosion/ImpactFire.xml</path>
+  <condition>
+    <equals>
+      <property>sim/multiplay/generic/int[2]</property>
+      <value>1</value>
+    </equals>
+  </condition>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>0</z-m>
+    <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+  
+  <!-- Impact fire smoke -->
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Explosion/ImpactFireSmoke.xml</path>
+  <condition>
+    <equals>
+      <property>sim/multiplay/generic/int[2]</property>
+      <value>1</value>
+    </equals>
+  </condition>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>0</z-m>
+    <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+  
+  <!-- Flight fire -->
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Explosion/FlightFire.xml</path>
+  <condition>
+    <equals>
+      <property>sim/multiplay/generic/int[2]</property>
+      <value>2</value>
+    </equals>
+  </condition>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+
+    <z-m>0</z-m>
+    <heading-deg>0</heading-deg>
+    </offsets>
+
+  </model>
+  
+
+  <!-- Flight fire smoke -->
+  <model>
+  <path>Aircraft/V-1_FlyingBomb/Models/Effects/Explosion/FlightFireSmoke.xml</path>
+  <condition>
+    <equals>
+      <property>sim/multiplay/generic/int[2]</property>
+      <value>2</value>
+    </equals>
+  </condition>
+  <offsets>
+    <x-m>0</x-m>
+    <y-m>0</y-m>
+    <z-m>0</z-m>
+    <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+  
+</PropertyList>

@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+V-1 Flying bomb
+Created and maintained by Tomáš Komárek
+************************************************************************
+-->
+<PropertyList>
+
+
+<sim include="Dialogs/help.xml">
+  <description>V-1 Flying Bomb</description>
+  <author>Tomaskom, Mark Suria (3D model)</author>
+  <status>release 1.0</status>
+  <flight-model>yasim</flight-model>
+  <aero>V-1-yasim</aero>  
+
+  <startup>
+    <splash-texture>Aircraft/V-1_FlyingBomb/V-1_Splash.jpg</splash-texture>
+  </startup>
+
+  <model>
+    <path>Aircraft/V-1_FlyingBomb/Models/V-1.xml</path>
+  </model>
+
+  <rating>
+    <FDM type="int">4</FDM>
+    <systems type="int">3</systems>
+    <cockpit type="int">0</cockpit>
+    <model type="int">2</model>
+  </rating>
+
+  <fuel-fraction>1.0</fuel-fraction>
+  
+  
+  <systems>
+    <autopilot>
+      <path>Aircraft/V-1_FlyingBomb/Systems/autopilot.xml</path>
+    </autopilot>
+  </systems>
+
+  <virtual-cockpit archive="y">true</virtual-cockpit>
+  
+  <chase-distance-m type="double" archive="y">-20.0</chase-distance-m>
+
+  <!-- Reposition view centers ([-3.0,0,0] is nosetip)
+  YASim X,Y,Z are here Y,Z,X -->
+  <view n="0">
+    <internal archive="y">true</internal>
+      <config>
+        <x-offset-m archive="y">0</x-offset-m>
+        <y-offset-m archive="y">0.5</y-offset-m>
+        <z-offset-m archive="y">-2.0</z-offset-m>
+        <pitch-offset-deg>-7</pitch-offset-deg>
+        <default-field-of-view-deg>112</default-field-of-view-deg>
+      </config>
+      <dynamic>
+        <enabled type="bool">0</enabled>
+      </dynamic>
+  </view>
+  <view n="1">
+    <config>
+      <target-z-offset-m archive="y" 
+      type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+  <view n="2">
+    <config>
+    <target-z-offset-m archive="y" 
+    type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+  <view n="3">
+    <config>
+    <target-z-offset-m archive="y" 
+    type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+  <view n="4">
+    <config>
+    <target-z-offset-m archive="y" 
+    type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+  <view n="5">
+    <config>
+    <target-z-offset-m archive="y" 
+    type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+  <view n="6">
+    <config>
+    <target-z-offset-m archive="y" 
+    type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+  <view n="7">
+    <config>
+    <target-z-offset-m archive="y" 
+    type="double">0.0</target-z-offset-m>
+      <target-y-offset-m archive="y" 
+      type="double">0.0</target-y-offset-m>
+    </config>
+  </view>
+
+
+  <flaps>
+    <setting>0.00</setting>
+    <setting>0.5</setting>
+    <setting>1.00</setting>
+  </flaps>
+  
+  <menubar include="Aircraft/V-1_FlyingBomb/Dialogs/V-1-menu.xml"/>
+  
+  <sound>
+    <audible>true</audible>
+    <path>Aircraft/V-1_FlyingBomb/Sounds/V-1-sound.xml</path>
+  </sound>
+  
+  <systems>
+    <autopilot>
+      <path>Aircraft/V-1_FlyingBomb/Systems/autopilot.xml</path>
+    </autopilot>
+  </systems>
+  
+  <multiplay>
+    <generic>
+	 <!-- Crashed boolean - disables engine and triggers sound -->
+	 <int n="0" alias="/sim/crashed" />
+	 <!-- int[1] reserved for explosion animation transfer -->
+	 <!-- int[2] reserved for fire animation transfer -->
+	 
+	 <!-- Throttle for flame animation -->
+	 <float n="0" alias="/controls/engines/engine[0]/throttle" />
+	 
+    </generic>
+   </multiplay>
+  
+  <menubar include="Dialogs/V-1-menu.xml"/>		
+  
+</sim>
+
+
+
+
+
+<input>
+  <keyboard include="Input/V-1-keyboard.xml" />
+</input>
+	
+<environment>
+  <turbulence>
+    <use-cloud-turbulence>true</use-cloud-turbulence>
+  </turbulence>
+</environment>
+
+<controls>
+  <gear>
+    <brake-parking type="double">1.0</brake-parking>
+  </gear>  
+</controls>
+
+
+<consumables>
+  <fuel>
+    <tank n="0">
+      <tank-num type="int">0</tank-num>
+      <level-gal_us archive="y">135.4</level-gal_us>
+    </tank>
+  </fuel>
+</consumables>
+
+<nasal>
+  <V1>
+    <file>Aircraft/V-1_FlyingBomb/Nasal/Init.nas</file>
+    <file>Aircraft/V-1_FlyingBomb/Nasal/Launch.nas</file>
+    <file>Aircraft/V-1_FlyingBomb/Nasal/Explode.nas</file>
+    <file>Aircraft/V-1_FlyingBomb/Nasal/Topple.nas</file>
+  </V1>
+</nasal>
+
+
+</PropertyList>

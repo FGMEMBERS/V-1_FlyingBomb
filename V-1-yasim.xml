@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+V-1 Flying Bomb (buzzbomb)
+Created by Tomaskom
+
+************************************************************************
+-->
+
+<!-- NOSETIP x=-3.0 z=0.0 -->
+
+<airplane mass="4740">
+
+
+  <!-- Approach -->
+  <approach speed="200" aoa="5.8" fuel="0.35">
+    <control-setting axis="/controls/engines/engine[0]/throttle" 
+    value="0.4"/>
+    
+    <control-setting axis="/controls/flight/flaps" value="0"/>
+    <control-setting axis="/controls/gear/gear-down" value="0"/>
+  </approach>
+
+  <!-- Cruise -->
+  <cruise speed="345.6" alt="3000" fuel="0.8">
+    <control-setting axis="/controls/engines/engine[0]/throttle" 
+    value="1.0"/>
+    <control-setting axis="/controls/flight/flaps" value="0.0"/>
+    <control-setting axis="/controls/gear/gear-down" value="0"/>
+  </cruise>
+
+  <cockpit x="2.0" y="0.0" z="0.5"/>
+
+
+
+  <!-- Front fuselage -->
+  <fuselage ax="2.8" ay="0" az="0" 
+            bx="0.400" by="0" bz="0" 
+            cx="0.7" 
+            width="0.972" taper="0.789" midpoint="1"/>
+  <!-- Rear fuselage -->
+  <fuselage ax="0.400" ay="0" az="0" 
+            bx="-4.254" by="0" bz="0" 
+            cx="0.5"
+            width="0.972" taper="0.0" midpoint="0"/>
+  <!-- Pulse jet -->
+  <fuselage ax="-1.812" ay="0" az="0.715" 
+            bx="-5.383" by="0" bz="0.740" 
+            cx="0.1" 
+            width="0.420" taper="1.0" midpoint="0"/>
+            
+  
+  <!-- Wing -->
+  <wing x="-0.194" y="0.492" z="0.0"
+        chord="1.140"
+        length="2.200"
+        taper="1.0"
+        sweep="0.0"
+		incidence="0.0"
+        dihedral="0.0"
+        camber="0.12">
+        <stall aoa="13.5" width="5.5" peak="1.3"/>
+        
+        <flap1 start="0.6" end="1.0" lift="1.2" drag="1.2"/>
+
+        <control-input axis="/controls/flight/aileron" 
+        control="FLAP1" split="true"/>
+        <control-input axis="/controls/flight/aileron-trim" 
+        control="FLAP1" split="true"/>
+
+        
+        <control-output control="FLAP1" side="left" 
+        prop="/surface-positions/left-aileron-pos-norm"/>
+        <control-output control="FLAP1" side="right" 
+        prop="/surface-positions/right-aileron-pos-norm"/>
+        <control-output control="FLAP1" 
+        prop="/surface-positions/aileron-pos-norm"/>
+
+        <control-speed control="FLAP1" transition-time="0.3"/>
+  </wing>
+
+  <!-- Horizontal stabilizer -->
+  <hstab x="-3.500" y="0.110" z="0.0"
+         chord="0.546"
+         length="0.959"
+         taper="1.0" 
+         sweep="0.0"
+         dihedral="0.0">
+         <stall aoa="14.5" width="5" peak="1.2"/>
+         <flap0 start="0" end="0.88" lift="1.42" drag="1.6"/>
+         
+         <control-input axis="/controls/flight/elevator" 
+         control="FLAP0" square="false"/>
+         <control-input axis="/controls/flight/elevator-trim" 
+         control="FLAP0"/>
+         <control-output control="FLAP0" 
+         prop="surface-positions/left-elevator-pos-norm"/>
+         <control-output control="FLAP0" 
+         prop="surface-positions/elevator-pos-norm"/>
+         
+         <control-speed control="FLAP0" transition-time="2"/>
+  </hstab>
+
+  <!-- Vertical stabilizer -->
+  <vstab x="-3.938" y="0" z="0.038"
+         chord="0.532"
+         length="0.491"
+         taper="1.0"
+         sweep="0.0">
+         <stall aoa="12" width="5" peak="1.5"/>
+         <flap0 start="0.13" end="0.87" lift="1.55" drag="1.2"/>
+
+         <control-input axis="/controls/flight/rudder" 
+         control="FLAP0" invert="true"/>
+         <control-input axis="/controls/flight/rudder-trim" 
+         control="FLAP0" invert="true"/>
+
+         <control-output control="FLAP0" 
+         prop="/surface-positions/rudder-pos-norm"/>
+
+         <control-speed control="FLAP0" transition-time="1"/>
+  </vstab>
+  
+
+  <!-- Engine: Argus As 014 Pulse jet engine, 2.7 kN -->
+  <!-- TODO: tune tsfc to match range -->
+  <jet x="-3.479" y="0.0" z="0.725"
+       mass="185"
+       thrust="660"
+       exhaust-speed="1520"
+       tsfc="4.03"
+       egt="1093">
+       <actionpt x="-3.479" y="0.0" z="0.725"/>
+       <control-input axis="/controls/engines/engine[0]/throttle" 
+       control="THROTTLE"/>
+  </jet>
+  
+  <!-- A rather hackish way to simulate the launch rail -->
+  <thruster x="3.0"  y="0.0" z="0.0" vx="1" vy="0" vz="0"
+  thrust="30000">
+  <control-input axis="/controls/engines/thruster[0]/throttle" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+  </thruster>
+
+  <!-- nose gear -->
+  <gear x="2.3" y="0.0" z="-1" 
+        retract-time="7"
+        compression="0.7"
+        spring="1.1"
+        damp="1.4">
+        <control-input axis="/controls/flight/rudder" 
+        control="STEER" square="false"/>
+        <control-input axis="/controls/gear/gear-down" 
+        control="EXTEND"/>
+
+        <control-output control="EXTEND" 
+        prop="/gear/gear[0]/position-norm"/>
+
+        <control-speed control="EXTEND" transition-time="7"/>
+  </gear>
+
+  <!-- left main gear -->
+  <gear x="-0.21" y="1.1" z="-1"
+        retract-time="7"
+        compression="0.8"
+        spring="0.85"
+        damp="2">
+        <control-input axis="/controls/gear/brake-left" 
+        control="BRAKE"/>
+        <control-input axis="/controls/gear/brake-parking" 
+        control="BRAKE"/>
+        <control-input axis="/controls/gear/gear-down" 
+        control="EXTEND"/>
+
+        <control-output control="EXTEND" 
+        prop="gear/gear[1]/position-norm"/>
+
+        <control-speed control="EXTEND" transition-time="7"/>
+  </gear>
+ 
+  <!-- right main gear -->
+  <gear x="-0.21" y="-1.1" z="-1"  
+        retract-time="7"  
+        compression="0.8" 
+        spring="0.85"
+        damp="2">
+        <control-input axis="/controls/gear/brake-right" 
+        control="BRAKE"/> 
+        <control-input axis="/controls/gear/brake-parking" 
+        control="BRAKE"/>
+        <control-input axis="/controls/gear/gear-down" 
+        control="EXTEND"/>
+
+        <control-output control="EXTEND" 
+        prop="gear/gear[2]/position-norm"/>
+
+        <control-speed control="EXTEND" transition-time="7"/>
+  </gear>
+
+  <!--  Internal fuel capacity total: 150 gal (75 octane gasoline) -->
+  <tank x="-0.5"  y="0.0" z="0.0" jet="true" capacity="1008"/>
+
+  <!-- Target CG: -0.057 -->
+  <ballast x="2.3" y="0.0" z="0.0" mass="898"/>
+
+</airplane>

@@ -1,0 +1,22 @@
+
+<PropertyList>
+
+  <key n="76">
+    <name>Shift-L</name>
+    <desc>Launch from ramp</desc>
+    <binding> 
+      <command>nasal</command>
+      <script>V1.launch();</script>
+    </binding>
+  </key>
+  <key n="68">
+    <name>Shift-D</name>
+    <desc>Detonate</desc>
+    <binding> 
+      <command>nasal</command>
+      <script>V1.detonate();</script>
+    </binding>
+  </key>
+  
+
+</PropertyList>
